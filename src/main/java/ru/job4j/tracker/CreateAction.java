@@ -9,12 +9,13 @@ public class CreateAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Consumer<String> output, Tracker tracker) {
+    public boolean execute(Input input, Consumer<String> output, ITracker tracker) {
         output.accept("Enter name: ");
         String name = input.askStr("");
         Item item = new Item(name);
         tracker.add(item);
         output.accept("=== Done ====");
+        output.accept("Created item: name = " + item.getName() + ", id = " + item.getId());
         return true;
     }
 }

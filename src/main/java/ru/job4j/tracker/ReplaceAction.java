@@ -9,14 +9,14 @@ public class ReplaceAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Consumer<String> output, Tracker tracker) {
+    public boolean execute(Input input, Consumer<String> output, ITracker tracker) {
         String id = input.askStr("Enter id: ");
         String name = input.askStr("Enter name: ");
         Item item = new Item(name);
         if (tracker.replace(id, item)) {
             output.accept("=== Done ====");
         } else {
-            output.accept("No such item!");
+            output.accept("No item with such id!");
         }
         return true;
     }
