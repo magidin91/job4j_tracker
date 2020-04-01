@@ -28,7 +28,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item " + this.getName() + " :" + this.getId();
+        return "Item: " + "name=" + this.getName() + ", id=" + this.getId();
     }
 
     @Override
@@ -40,11 +40,12 @@ public class Item {
             return false;
         }
         Item item = (Item) o;
-        return Objects.equals(id, item.getId());
+        return Objects.equals(id, item.id)
+                && Objects.equals(name, item.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(id, name);
     }
 }

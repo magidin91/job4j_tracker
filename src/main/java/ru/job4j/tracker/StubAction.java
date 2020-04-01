@@ -11,7 +11,7 @@ public class StubAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Consumer<String> output, Tracker tracker) {
+    public boolean execute(Input input, Consumer<String> output, ITracker tracker) {
         call = true;
         return false;
     }
