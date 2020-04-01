@@ -9,9 +9,9 @@ public class FindAllAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Consumer<String> output, Tracker tracker) {
+    public boolean execute(Input input, Consumer<String> output, ITracker tracker) {
         for (Item item : tracker.findAll()) {
-            output.accept(String.format("%s %s", item.getId(), item.getName()));
+            output.accept(String.format("id=%s, name=%s", item.getId(), item.getName()));
         }
         return true;
     }
