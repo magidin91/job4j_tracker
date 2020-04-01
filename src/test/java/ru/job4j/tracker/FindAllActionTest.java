@@ -22,7 +22,7 @@ public class FindAllActionTest {
         FindAllAction act = new FindAllAction();
         act.execute(new StubInput(new String[]{}), System.out::println, tracker);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-                .add(item.getId() + " " + item.getName())
+                .add("id=" + item.getId() + ", name=" + item.getName())
                 .toString();
         assertThat(new String(out.toByteArray()), is(expect));
         System.setOut(std);

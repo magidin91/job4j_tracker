@@ -28,7 +28,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item " + this.getName() + " :" + this.getId();
+        return "Item: " + "name=" + this.getName() + ", id=" + this.getId();
     }
 
     @Override

@@ -9,7 +9,7 @@ public class FindItemsByName implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Consumer<String> output, Tracker tracker) {
+    public boolean execute(Input input, Consumer<String> output, ITracker tracker) {
         String name = input.askStr("Enter name: ");
         for (Item item : tracker.findByName(name)) { //выводим элементы
             if (item != null) {

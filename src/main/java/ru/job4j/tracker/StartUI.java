@@ -1,15 +1,19 @@
 package ru.job4j.tracker;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class StartUI {
+    private static final Logger LOG = LogManager.getLogger(StartUI.class.getName());
     private final Input input;
-    private final Tracker tracker;
+    private final ITracker tracker;
     private final Consumer<String> output;
 
-    public StartUI(Input input, Tracker tracker, Consumer<String> output) {
+    public StartUI(Input input, ITracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
         this.output = output;
@@ -35,10 +39,13 @@ public class StartUI {
     public static void main(String[] args) {
         Input input = new ConsoleInput();
         Input validate = new ValidateInput(input);
-        Tracker tracker = new Tracker();
         ArrayList<UserAction> actions = new ArrayList<>(Arrays.asList(new CreateAction(), new FindAllAction(), new ReplaceAction(),
                 new DeleteAction(), new FindItemByIdAction(), new FindItemsByName(), new ExitAction()
         ));
-        new StartUI(validate, tracker, System.out::println).init(actions);
+        try (TrackerSQL tracker = new TrackerSQL()) {
+            new StartUI(validate, tracker, System.out::println).init(actions);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
     }
 }
