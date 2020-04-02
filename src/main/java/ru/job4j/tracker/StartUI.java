@@ -42,7 +42,7 @@ public class StartUI {
         ArrayList<UserAction> actions = new ArrayList<>(Arrays.asList(new CreateAction(), new FindAllAction(), new ReplaceAction(),
                 new DeleteAction(), new FindItemByIdAction(), new FindItemsByName(), new ExitAction()
         ));
-        try (TrackerSQL tracker = new TrackerSQL()) {
+        try (TrackerSQL tracker = new TrackerSQL(new ConnectionCreator().init())) {
             new StartUI(validate, tracker, System.out::println).init(actions);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);

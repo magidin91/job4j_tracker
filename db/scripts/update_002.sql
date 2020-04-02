@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS items (id serial primary key, item varchar(2000));
