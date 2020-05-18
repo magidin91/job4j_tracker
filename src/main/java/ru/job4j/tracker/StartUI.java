@@ -1,14 +1,14 @@
 package ru.job4j.tracker;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class StartUI {
-    private static final Logger LOG = LogManager.getLogger(StartUI.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(StartUI.class);
     private final Input input;
     private final ITracker tracker;
     private final Consumer<String> output;
@@ -45,7 +45,7 @@ public class StartUI {
         try (TrackerSQL tracker = new TrackerSQL(new ConnectionCreator().init())) {
             new StartUI(validate, tracker, System.out::println).init(actions);
         } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
         }
     }
 }

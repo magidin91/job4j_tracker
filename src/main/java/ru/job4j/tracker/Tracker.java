@@ -1,9 +1,13 @@
 package ru.job4j.tracker;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Tracker implements ITracker {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Tracker.class);
     /**
      * Массив для хранения заявок.
      */
@@ -65,7 +69,7 @@ public class Tracker implements ITracker {
         if (indexOf(id) != -1) {
             return items.get(indexOf(id));
         } else {
-            System.out.println("String id doesn't exist");
+            LOGGER.info("Id doesn't exist");
             return null;
         }
     }
