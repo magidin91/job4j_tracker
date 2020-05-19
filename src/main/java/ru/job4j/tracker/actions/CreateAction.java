@@ -1,11 +1,15 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.actions;
+
+import ru.job4j.tracker.tracker.ITracker;
+import ru.job4j.tracker.input.Input;
+import ru.job4j.tracker.model.Item;
 
 import java.util.function.Consumer;
 
 public class CreateAction implements UserAction {
     @Override
     public String name() {
-        return "=== Create a new Item ====";
+        return "=== Create Item ====";
     }
 
     @Override
@@ -15,7 +19,7 @@ public class CreateAction implements UserAction {
         Item item = new Item(name);
         tracker.add(item);
         output.accept("=== Done ====");
-        output.accept("Created item: name = " + item.getName() + ", id = " + item.getId());
+        output.accept(String.format("The item is created: name = %s, id = %s", item.getName(), item.getId()));
         return true;
     }
 }

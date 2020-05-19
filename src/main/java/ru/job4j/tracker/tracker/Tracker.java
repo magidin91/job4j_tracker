@@ -1,23 +1,32 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.tracker;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import ru.job4j.tracker.model.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+/**
+ * The class performs actions with the item storage.
+ * A List is used for storing items.
+ */
 public class Tracker implements ITracker {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Tracker.class);
     /**
-     * Массив для хранения заявок.
+     * A List for storing items.
      */
-    private final ArrayList<Item> items = new ArrayList<>();
+    private final List<Item> items;
 
     /**
-     * Метод добавления заявки в хранилище
-     *
-     * @param item новая заявка
+     * By default, the ArrayList is used
      */
+    public Tracker() {
+        this.items = new ArrayList<>();
+    }
+
+    public Tracker(List<Item> items) {
+        this.items = items;
+    }
+
     public Item add(Item item) {
         item.setId(this.generateId());
         items.add(item);
@@ -66,25 +75,25 @@ public class Tracker implements ITracker {
     }
 
     public Item findById(String id) {
-        if (indexOf(id) != -1) {
-            return items.get(indexOf(id));
-        } else {
-            LOGGER.info("Id doesn't exist");
-            return null;
+        Item rsl = null;
+        int index = indexOf(id);
+        if (index != -1) {
+            rsl = items.get(index);
         }
+        return rsl;
     }
 
     /**
-     * Метод генерирует уникальный ключ для заявки.
-     * Так как у заявки нет уникальности полей, имени и описание. Для идентификации нам нужен уникальный ключ.
-     *
-     * @return Уникальный ключ.
+     * Generates a unique item key for identification
      */
     private String generateId() {
         Random rm = new Random();
         return String.valueOf(rm.nextLong() + System.currentTimeMillis());
     }
 
+    /**
+     * Returns the item index in the List by id or -1 if there is no item with this id.
+     */
     private int indexOf(String id) {
         int rsl = -1;
         for (int index = 0; index < items.size(); index++) {

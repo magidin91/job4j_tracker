@@ -1,22 +1,17 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.connection;
 
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Connection, which rollback all commits.
- * It is used for integration test.
+ * This class is responsible for creating a database connection that rolls back all commits.
+ * It is used for integration testing
  */
 public class ConnectionRollback {
 
     /**
-     * Метод создает соедениение с autocommit=false и делает rollback, когда соединение закрывается. (метод возвращает
-     * прокси для объекта connection)
-     *
-     * @param connection connection.
-     * @return Connection object.
-     * @throws SQLException possible exception.
+     * Creates a connection and makes a rollback when the connection is closed.
      */
     public static Connection create(Connection connection) throws SQLException {
         connection.setAutoCommit(false);

@@ -1,11 +1,14 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+import ru.job4j.tracker.actions.StubAction;
+import ru.job4j.tracker.input.StubInput;
+import ru.job4j.tracker.tracker.Tracker;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.StringJoiner;
 import java.util.function.Consumer;
 
@@ -13,14 +16,13 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * C использованием функционального интерфейса и выводом в буффер.
- * Создаем реализацию функционального интерфейса в анонимном классе, реализуем вывод в буфер из new PrintStream(out).
+ * Redirecting output to an array of bytes using an anonymous class
  */
 public class StartUITest2 {
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
-    private final Consumer<String> output = new Consumer<String>() {
-        private final PrintStream stdout = new PrintStream(out);
 
+    private final Consumer<String> output = new Consumer<>() {
+        private final PrintStream stdout = new PrintStream(out);
         @Override
         public void accept(String s) {
             stdout.println(s);
@@ -34,7 +36,7 @@ public class StartUITest2 {
                 new String[]{"0"}
         );
         StubAction action = new StubAction();
-        new StartUI(input, new Tracker(), output).init(new ArrayList<UserAction>(Arrays.asList(action)));
+        new StartUI(input, new Tracker(), output).init(new ArrayList<>(Collections.singletonList(action)));
         assertThat(action.isCall(), is(true));
     }
 
@@ -44,7 +46,7 @@ public class StartUITest2 {
                 new String[]{"0"}
         );
         StubAction action = new StubAction();
-        new StartUI(input, new Tracker(), output).init(new ArrayList<UserAction>(Arrays.asList(action)));
+        new StartUI(input, new Tracker(), output).init(new ArrayList<>(Collections.singletonList(action)));
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("Menu.")
                 .add("0. Stub action")

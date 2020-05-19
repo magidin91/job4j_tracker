@@ -3,16 +3,22 @@ package ru.job4j.tracker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import ru.job4j.tracker.actions.StubAction;
+import ru.job4j.tracker.input.StubInput;
+import ru.job4j.tracker.tracker.Tracker;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.StringJoiner;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Redirect output to an array of bytes
+ */
 public class StartUITest {
     private final PrintStream stdout = System.out;
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -33,7 +39,7 @@ public class StartUITest {
                 new String[]{"0"}
         );
         StubAction action = new StubAction();
-        new StartUI(input, new Tracker(), System.out::println).init(new ArrayList<UserAction>(Arrays.asList(action)));
+        new StartUI(input, new Tracker(), System.out::println).init(new ArrayList<>(Collections.singletonList(action)));
         assertThat(action.isCall(), is(true));
     }
 
@@ -43,7 +49,7 @@ public class StartUITest {
                 new String[]{"0"}
         );
         StubAction action = new StubAction();
-        new StartUI(input, new Tracker(), System.out::println).init(new ArrayList<UserAction>(Arrays.asList(action)));
+        new StartUI(input, new Tracker(), System.out::println).init(new ArrayList<>(Collections.singletonList(action)));
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("Menu.")
                 .add("0. Stub action")

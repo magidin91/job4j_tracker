@@ -1,7 +1,13 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.actions;
+
+import ru.job4j.tracker.input.Input;
+import ru.job4j.tracker.tracker.ITracker;
 
 import java.util.function.Consumer;
 
+/**
+ * The stub of the menu item for testing
+ */
 public class StubAction implements UserAction {
     private boolean call = false;
 
