@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import ru.job4j.tracker.actions.StubAction;
 import ru.job4j.tracker.input.StubInput;
@@ -12,26 +10,25 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.StringJoiner;
+import java.util.function.Consumer;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Redirect output to an array of bytes
+ * Redirecting output to an array of bytes using an anonymous class
  */
 public class StartUITest {
-    private final PrintStream stdout = System.out;
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-    @Before
-    public void loadOutput() {
-        System.setOut(new PrintStream(this.out));
-    }
+    private final Consumer<String> output = new Consumer<>() {
+        private final PrintStream stdout = new PrintStream(out);
+        @Override
+        public void accept(String s) {
+            stdout.println(s);
+        }
+    };
 
-    @After
-    public void backOutput() {
-        System.setOut(this.stdout);
-    }
 
     @Test
     public void whenExit() {
@@ -39,7 +36,7 @@ public class StartUITest {
                 new String[]{"0"}
         );
         StubAction action = new StubAction();
-        new StartUI(input, new Tracker(), System.out::println).init(new ArrayList<>(Collections.singletonList(action)));
+        new StartUI(input, new Tracker(), output).init(new ArrayList<>(Collections.singletonList(action)));
         assertThat(action.isCall(), is(true));
     }
 
@@ -49,7 +46,7 @@ public class StartUITest {
                 new String[]{"0"}
         );
         StubAction action = new StubAction();
-        new StartUI(input, new Tracker(), System.out::println).init(new ArrayList<>(Collections.singletonList(action)));
+        new StartUI(input, new Tracker(), output).init(new ArrayList<>(Collections.singletonList(action)));
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("Menu.")
                 .add("0. Stub action")
