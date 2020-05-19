@@ -1,8 +1,12 @@
 # job4j_tracker
 
 Tracker is a system of requests.
+
 This project is a console application. The user is shown a menu with the program's features.
+
 The program can:
+
+https://github.com/magidin91/job4j_tracker/blob/readme_1/src/main/resources/menu.png
 
 1. Create a request
 2. Edit a request 
