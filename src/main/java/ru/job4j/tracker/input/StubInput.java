@@ -1,8 +1,11 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.input;
 
+/**
+ * Data entry stub for testing. Input data is provided from an array.
+ */
 public class StubInput implements Input {
-    private String[] answers;
-    private int position = 0;
+    private final String[] answers;
+    private int position;
 
     public StubInput(String[] answers) {
         this.answers = answers;
@@ -15,7 +18,7 @@ public class StubInput implements Input {
 
     @Override
     public int askInt(String question) {
-        return Integer.valueOf(askStr(question));
+        return Integer.parseInt(askStr(question));
     }
 
     @Override

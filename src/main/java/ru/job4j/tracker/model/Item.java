@@ -1,7 +1,10 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.model;
 
 import java.util.Objects;
 
+/**
+ * A request model
+ */
 public class Item {
     private String id;
     private String name;
@@ -28,7 +31,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item: " + "name=" + this.getName() + ", id=" + this.getId();
+        return String.format("Item: name = %s, id = %s", this.getName(), this.getId());
     }
 
     @Override

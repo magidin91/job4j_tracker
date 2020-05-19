@@ -1,13 +1,18 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.connection;
+
+import ru.job4j.tracker.tracker.TrackerSQL;
 
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
 
+/**
+ * The class is responsible for creating a connection to the database
+ */
 public class ConnectionCreator {
     /**
-     * Метод загружает пропертис и устанавливает соединение с БД, озвращает объект connection
+     * Сreates a connection to the database
      */
     public Connection init() {
         try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {

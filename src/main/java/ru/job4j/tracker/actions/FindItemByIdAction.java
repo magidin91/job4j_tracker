@@ -1,4 +1,8 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.actions;
+
+import ru.job4j.tracker.tracker.ITracker;
+import ru.job4j.tracker.input.Input;
+import ru.job4j.tracker.model.Item;
 
 import java.util.function.Consumer;
 
@@ -13,7 +17,8 @@ public class FindItemByIdAction implements UserAction {
         String id = input.askStr("Enter id: ");
         Item item = tracker.findById(id);
         if (item != null) {
-            output.accept(item.toString());
+            output.accept("=== Done ====");
+            output.accept(String.format("Item item: name = %s, id = %s", item.getName(), item.getId()));
         } else {
             output.accept("No such item!");
         }

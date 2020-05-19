@@ -1,9 +1,11 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+import ru.job4j.tracker.comparator.ItemComparator;
+import ru.job4j.tracker.comparator.ItemReverseComparator;
+import ru.job4j.tracker.model.Item;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -17,7 +19,7 @@ public class ComparatorTest {
     public void sort() {
         List<Item> items = Arrays.asList(new Item("b"), new Item("a"), new Item("c"));
         System.out.println(items);
-        Collections.sort(items, new ItemComparator());
+        items.sort(new ItemComparator());
         List<Item> expected = Arrays.asList(new Item("a"), new Item("b"), new Item("c"));
         System.out.println(items);
         assertThat(items, is(expected));
@@ -27,7 +29,7 @@ public class ComparatorTest {
     public void sortReverse() {
         List<Item> items = Arrays.asList(new Item("b"), new Item("a"), new Item("c"));
         System.out.println(items);
-        Collections.sort(items, new ItemReverseComparator());
+        items.sort(new ItemReverseComparator());
         List<Item> expected = Arrays.asList(new Item("c"), new Item("b"), new Item("a"));
         System.out.println(items);
         assertThat(items, is(expected));

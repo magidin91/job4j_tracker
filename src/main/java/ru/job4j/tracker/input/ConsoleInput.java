@@ -1,9 +1,12 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.input;
 
 import java.util.Scanner;
 
+/**
+ * The class provides input from the console
+ */
 public class ConsoleInput implements Input {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     @Override
     public String askStr(String question) {
@@ -13,7 +16,7 @@ public class ConsoleInput implements Input {
 
     @Override
     public int askInt(String question) {
-        return Integer.valueOf(askStr(question));
+        return Integer.parseInt(askStr(question));
     }
 
     @Override

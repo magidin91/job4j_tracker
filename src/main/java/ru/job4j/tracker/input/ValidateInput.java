@@ -1,10 +1,9 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.input;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+/**
+ * The class checks a validity of the input
+ */
 public class ValidateInput implements Input {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ValidateInput.class);
     private final Input input;
 
     public ValidateInput(Input input) {
@@ -18,7 +17,7 @@ public class ValidateInput implements Input {
 
     @Override
     public int askInt(String question) {
-        return Integer.valueOf(askStr(question));
+        return Integer.parseInt(askStr(question));
     }
 
     @Override
@@ -30,9 +29,9 @@ public class ValidateInput implements Input {
                 value = input.askInt(question, max);
                 invalid = false;
             } catch (IllegalStateException moe) {
-                LOGGER.info("Please select key from menu ");
+                System.out.println("Please select key from menu ");
             } catch (NumberFormatException nfe) {
-                LOGGER.info("Please enter validate data again ");
+                System.out.println("Please enter validate data again ");
             }
         } while (invalid);
         return value;
