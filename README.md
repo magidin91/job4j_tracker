@@ -6,11 +6,11 @@
 
 #### Technologies/Frameworks: Java, JDBC, SQL(PostgreSQL), Slf4j + Log4j, Liquibase,  JUnit
 
-#### Tracker is a system of requests.
+###### Tracker is a system of requests.
 
-######This project is a console application. The user is shown a menu with the program's features.
+###### This project is a console application. The user is shown a menu with the program's features.
 
-######The program can:
+###### The program can:
 
 ![alt text](https://github.com/magidin91/job4j_tracker/blob/readme_1/src/main/resources/menu.png)
 
