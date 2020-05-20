@@ -14,3 +14,4 @@ The program can:
 
 ![alt text](https://github.com/magidin91/job4j_tracker/blob/readme_1/src/main/resources/menu.png)
 
+Requests can be stored in a database or in memory.
